@@ -3,7 +3,7 @@ import Movie from "./Movie";
 
 const Movies = ({ movies , selectedGenre }) => {
     return (
-        <div className="row g-3">
+        <div className="row g-4">
             <h3 className="display-4">{selectedGenre.name } Movies</h3>
             {
                 movies.map((movie) => (
@@ -11,6 +11,7 @@ const Movies = ({ movies , selectedGenre }) => {
                 ))
             }
         </div>
+        
     );
 }
 
