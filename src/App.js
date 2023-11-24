@@ -38,6 +38,7 @@ const App = () => {
 
   const handleSelectGenre = (genre) => {
     setSelectedGender(genre);
+    console.log(genre)
   };
 
   return (
