@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ApiKey from "../API/Key";
 import "./card.css";
+import { useParams , Link} from "react-router-dom";
 
-const ShowDetails = ({ id, hideDetails }) => {
+const ShowDetails = () => {
     const [movie, setMovie] = useState({});
-
+    const {id} = useParams();
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
@@ -40,10 +41,12 @@ const ShowDetails = ({ id, hideDetails }) => {
             style={{
                 background: `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}') center/cover no-repeat fixed rgba(0, 0, 0, 0.7)`,
             }}
-        >
-            <button className="close-button" onClick={hideDetails}>
-                X
+        >   
+            <Link to={"/"}>
+            <button className="close-button" style={{fontSize:"20px"}}>
+                &#8592;
             </button>
+            </Link>
             {movie && (
                 <div className="movie-details">
                     <img

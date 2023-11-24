@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./card.css";
 import ShowDetails from "./ShowDetails";
+import { Link } from "react-router-dom";
 
 const Movie = ({ movie }) => {
     const [showDetails, setShowDetails] = useState(false);
@@ -9,6 +10,7 @@ const Movie = ({ movie }) => {
 
     return (
             <div className="col-md-6 col-lg-4 col-xl-3 d-flex mb-4 ">
+                <Link to={`/movies/${movie.id}`} style={{textDecoration:"none"}}>
                 <div className="card" onClick={toggleDetails}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -36,9 +38,11 @@ const Movie = ({ movie }) => {
                             </p>
                         )}
                     </div>
+
                 </div>
+                </Link>
                 <div className={`overlay ${showDetails ? "active" : ""}`} onClick={toggleDetails}>
-                {showDetails && <ShowDetails id={movie.id} hideDetails={toggleDetails} />}
+                {showDetails && <ShowDetails />}
                 </div>
             </div>
             
