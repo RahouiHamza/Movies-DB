@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Movies from "./Components/Movies";
 import Generes from "./Components/Generes";
 import ApiKey from "./API/Key";
+import NavBar from "./Components/NavBar";
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
@@ -9,20 +10,23 @@ const AllMovies = () => {
         id: "",
         name: "Popular",
     });
+    const [search, setSearch] = useState("");
 
     async function fetchMovies(genre) {
-        const url1 = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${ApiKey}`;
-        try {
-            let response;
+        let url;
+        if (search) {
+            url = `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=1&api_key=${ApiKey}`;
+        } else {
+            url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${ApiKey}`;
             if (genre) {
-                const url2 = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre.id}&language=en-US&api_key=${ApiKey}`;
-                response = await fetch(url2);
-            } else {
-                response = await fetch(url1);
+                url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre.id}&language=en-US&api_key=${ApiKey}`;
             }
+        }
+
+        try {
+            const response = await fetch(url);
             const data = await response.json();
             setMovies(data.results);
-            console.log(data.results);
         } catch (error) {
             console.log(error.message);
         }
@@ -30,7 +34,7 @@ const AllMovies = () => {
 
     useEffect(() => {
         fetchMovies();
-    }, []);
+    }, [search]);
 
     useEffect(() => {
         fetchMovies(selectedGender);
@@ -43,6 +47,7 @@ const AllMovies = () => {
 
     return (
         <div className="App">
+            <NavBar SetSearch={setSearch} search={search} />
             <div className="row">
                 <div className="container-fluid col p-5">
                     <Generes
