@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 
 export default function NavBar({SetSearch , search}) {
     const handleSearch = (e) => {
@@ -7,9 +8,9 @@ export default function NavBar({SetSearch , search}) {
     return (
         <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="link">
+                <NavLink className="navbar-brand" to="/">
                     Movies & Shows
-                </a>
+                </NavLink>
                 <button
                     className="navbar-toggler"
                     type="button"
